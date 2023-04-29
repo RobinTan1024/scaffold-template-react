@@ -1,9 +1,14 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
-        "target": "ES2015",
-        "moduleDetection": "auto",
+        "outDir": "./dist/",
         "sourceMap": true,
-        "strict": true
-    }
+        "noImplicitAny": true,
+        "module": "commonjs",
+        "target": "es5",
+        "jsx": "react",
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true,
+        "moduleResolution": "node"
+    },
+    "include": ["src"]
 }
