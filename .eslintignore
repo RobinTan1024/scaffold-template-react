@@ -1,0 +1,14 @@
+.vscode
+.idea
+node_modules
+dist
+public
+docs
+.husky
+src/mock/*
+script/*
+
+*.sh
+*.md
+*.woff
+*.ttf

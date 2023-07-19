@@ -1,14 +1,31 @@
 {
     "compilerOptions": {
         "outDir": "./dist/",
-        "sourceMap": true,
-        "noImplicitAny": true,
-        "module": "commonjs",
+        "rootDir": "./",
+        "module": "es6",
         "target": "es5",
-        "jsx": "react",
-        "allowJs": true,
-        "allowSyntheticDefaultImports": true,
-        "moduleResolution": "node"
+        "strict": true,
+        "alwaysStrict": true,
+        "importHelpers": true,
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "declaration": true,
+        "jsx": "react-jsx",
+        "allowJs": false,
+        "checkJs": false,
+        "sourceMap": true,
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["src/*"]
+        },
+        "allowUnreachableCode": true,
+        "noImplicitAny": true,
+        "noImplicitThis": false,
+        "noUnusedLocals": true,
+        "noImplicitReturns": false,
+        "noImplicitOverride": true,
+        "noFallthroughCasesInSwitch": true
     },
-    "include": ["src"]
+    "include": ["src/**/*"],
+    "exclude": ["node_modules", "dist"]
 }
