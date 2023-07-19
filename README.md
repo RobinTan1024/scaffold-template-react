@@ -2,13 +2,9 @@
 
 ## Roadmap
 
-### Week 1
-
-- [x] 11 Nov: Setup Vite as basic scaffold.
-- [ ] 12 Nov: Setup ESLint + Prettier + Husky + lint-staged.
-- [ ] 13 Nov: Setup tailwind.css & style/theme solution.
-
-### Week Future
+- [ ] 07-19: Setup ESLint + Prettier + Husky + lint-staged.
+- [ ] 07-20: Build with html and javascript.
+- [ ] Setup tailwind.css & style/theme solution.
 - [ ] Router config
 - [ ] Logon page
 - [ ] 404 page
