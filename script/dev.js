@@ -14,7 +14,6 @@ const webpackConfig = {
     devServer: {
         static: path.resolve(__dirname, '../dist'),
         port: 8080,
-        hot: true,
     },
     module: {
         rules: [
@@ -84,12 +83,10 @@ const webpackConfig = {
 };
 
 const compiler = webpack(webpackConfig);
-// compiler.run();
 const devServerOptions = { ...webpackConfig.devServer, open: false };
 const server = new WebpackDevServer(devServerOptions, compiler);
 
 const runServer = async () => {
-    console.log('Starting server...');
     await server.start();
 };
 
