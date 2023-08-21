@@ -6,6 +6,7 @@
         "dev": "node script/dev.js",
         "build": "node script/build.js",
         "prepare": "husky install",
+        "demo": "node script/demo",
         "lint:fix": "eslint src --fix --debug"
     },
     "dependencies": {
