@@ -90,7 +90,6 @@ const webpackConfigFactory = (env) => {
         entry: paths.entry,
         target: ['browserslist'],
         devtool: isProduction ? 'source-map' : 'cheap-module-source-map',
-        // devServer: { static: paths.dist, port: 8080 },
         output: {
             publicPath: paths.publicUrlOrPath,
             path: paths.dist,

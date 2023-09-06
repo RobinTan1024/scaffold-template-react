@@ -2,10 +2,10 @@
 
 ## Roadmap
 
--   [ ] 08-26: build package and generate report of build info and package info
--   [ ] 08-27: can build with Piggybank lib and run the IT Support System
+-   [x] 09-06: can build with Piggybank lib
+-   [ ] 09-07: can identify the program language is JS or TS then read related config and dev/build.
 -   [ ] ...
--   [ ] 07-22: Run unit test for staged tsx? files.
+-   [ ] Run unit test for staged files.
 -   [ ] Setup tailwind.css & style/theme solution.
 -   [ ] Router config
 -   [ ] Logon page

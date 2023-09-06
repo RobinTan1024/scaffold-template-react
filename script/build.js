@@ -14,16 +14,17 @@ const build = async () => {
 
     const config = webpackConfigFactory();
     webpack(config, (error, stats) => {
-        console.clear();
         if (error) {
+            msg_building.stopAndPersist();
             process.exit(1);
         }
         if (stats) {
             fs.writeFileSync(paths.stats, stats.toString());
             msg_building.text = '';
             msg_building.stopAndPersist();
-            process.exit(0);
         }
+
+        process.exit(0);
     });
 };
 
