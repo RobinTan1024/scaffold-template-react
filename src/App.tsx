@@ -3,9 +3,6 @@ import { Home } from './page/Home';
 
 const App: React.FC = () => {
     const [randomNum] = React.useState(Math.random());
-    React.useEffect(() => {
-        console.log('App mounted');
-    }, []);
 
     return (
         <main>

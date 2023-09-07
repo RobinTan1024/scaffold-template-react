@@ -16,7 +16,6 @@ const isProduction = process.env.NODE_ENV === 'production';
 const isEnvProductionProfile = true;
 const imageInlineSizeLimit = 10000;
 const useTailwind = fs.existsSync(path.join(paths.root, 'tailwind.config.js'));
-const useTypeScript = fs.existsSync(paths.configTS);
 
 const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
@@ -83,7 +82,7 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
     return loaders;
 };
 
-const webpackConfigFactory = (env) => {
+const webpackConfigFactory = () => {
     return (config = {
         mode: isProduction ? 'production' : 'development',
         stats: 'errors-warnings',
