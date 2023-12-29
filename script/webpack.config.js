@@ -11,8 +11,8 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const paths = require('./paths');
+const { isProductionMode } = require('./env');
 
-const isProduction = process.env.NODE_ENV === 'production';
 const isEnvProductionProfile = true;
 const imageInlineSizeLimit = 10000;
 const useTailwind = fs.existsSync(path.join(paths.root, 'tailwind.config.js'));
@@ -24,8 +24,8 @@ const sassModuleRegex = /\.module\.(scss|sass)$/;
 // common function to get style loaders
 const getStyleLoaders = (cssOptions, preProcessor) => {
     const loaders = [
-        !isProduction && require.resolve('style-loader'),
-        isProduction && {
+        !isProductionMode && require.resolve('style-loader'),
+        isProductionMode && {
             loader: MiniCssExtractPlugin.loader,
             // css is located in `static/css`, use '../../' to locate index.html folder
             // in production `paths.publicUrlOrPath` can be a relative path
@@ -84,19 +84,19 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
 
 const webpackConfigFactory = () => {
     return (config = {
-        mode: isProduction ? 'production' : 'development',
+        mode: isProductionMode ? 'production' : 'development',
         stats: 'errors-warnings',
         entry: paths.entry,
         target: ['browserslist'],
-        devtool: isProduction ? 'source-map' : 'cheap-module-source-map',
+        devtool: isProductionMode ? 'source-map' : 'cheap-module-source-map',
         output: {
             publicPath: paths.publicUrlOrPath,
             path: paths.dist,
-            clean: isProduction,
-            filename: isProduction ? 'static/js/[name].[contenthash:8].js' : 'static/js/bundle.js',
-            chunkFilename: isProduction ? 'static/js/[name].[contenthash:8].chunk.js' : 'static/js/[name].chunk.js',
+            clean: isProductionMode,
+            filename: isProductionMode ? 'static/js/[name].[contenthash:8].js' : 'static/js/bundle.js',
+            chunkFilename: isProductionMode ? 'static/js/[name].[contenthash:8].chunk.js' : 'static/js/[name].chunk.js',
             assetModuleFilename: 'static/media/[name].[hash][ext]',
-            devtoolModuleFilenameTemplate: isProduction
+            devtoolModuleFilenameTemplate: isProductionMode
                 ? (info) => path.relative(paths.src, info.absoluteResourcePath).replace(/\\/g, '/')
                 : (info) => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
         },
@@ -111,7 +111,7 @@ const webpackConfigFactory = () => {
         },
         infrastructureLogging: { level: 'none' },
         optimization: {
-            minimize: isProduction,
+            minimize: isProductionMode,
             minimizer: [
                 new TerserPlugin({
                     terserOptions: {
@@ -203,10 +203,10 @@ const webpackConfigFactory = () => {
                             options: {
                                 customize: require.resolve('babel-preset-react-app/webpack-overrides'),
                                 presets: [[require.resolve('babel-preset-react-app'), { runtime: 'automatic' }]],
-                                plugins: [!isProduction && require.resolve('react-refresh/babel')].filter(Boolean),
+                                plugins: [!isProductionMode && require.resolve('react-refresh/babel')].filter(Boolean),
                                 cacheDirectory: true,
                                 cacheCompression: false,
-                                compact: isProduction,
+                                compact: isProductionMode,
                             },
                         },
                         // Process any JS outside of the app with Babel.
@@ -314,7 +314,7 @@ const webpackConfigFactory = () => {
             new HtmlWebpackPlugin({
                 template: paths.template,
                 inject: true,
-                minify: isProduction
+                minify: isProductionMode
                     ? {
                           removeComments: true,
                           collapseWhitespace: true,
@@ -331,8 +331,8 @@ const webpackConfigFactory = () => {
             }),
             // new webpack.DefinePlugin(env.stringified),
             new ReactRefreshWebpackPlugin({ overlay: false }),
-            !isProduction && new CaseSensitivePathsPlugin(),
-            isProduction &&
+            !isProductionMode && new CaseSensitivePathsPlugin(),
+            isProductionMode &&
                 new MiniCssExtractPlugin({
                     filename: 'static/css/[name].[contenthash:8].css',
                     chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
@@ -361,7 +361,7 @@ const webpackConfigFactory = () => {
             new ESLintPlugin({
                 extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
                 eslintPath: require.resolve('eslint'),
-                failOnError: isProduction,
+                failOnError: isProductionMode,
                 context: paths.src,
                 cache: true,
                 cwd: paths.root,

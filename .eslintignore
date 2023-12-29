@@ -12,3 +12,5 @@ script/*
 *.md
 *.woff
 *.ttf
+
+.eslintrc.js

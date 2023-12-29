@@ -12,8 +12,8 @@ const compiler = webpack(config);
 const devServerOptions = { ...config.devServer, open: true };
 const server = new WebpackDevServer(devServerOptions, compiler);
 
-const runServer = async () => {
+const startDev = async () => {
     await server.start();
 };
 
-runServer();
+startDev();
